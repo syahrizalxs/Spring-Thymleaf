@@ -41,7 +41,7 @@ public class DosenDAOImpl implements DosenDAO {
             return ps;
         }, keyHolder);
 
-        param.setId(Objects.requireNonNull(keyHolder.getKey()).intValue());
+        param.setDosen_id(Objects.requireNonNull(keyHolder.getKey()).intValue());
         return param;
     }
 
@@ -50,21 +50,21 @@ public class DosenDAOImpl implements DosenDAO {
         String sql = "UPDATE " + Table.TABLE_DOSEN + " SET " +
                 "name = ?, " +
                 "address = ? " +
-                "WHERE id =  ? ";
+                "WHERE dosen_id =  ? ";
 
         jdbcTemplate.update(sql,
                 param.getName(),
                 param.getAddress(),
-                param.getId());
+                param.getDosen_id());
 
         return param;
     }
 
     @Override
     public int delete(Dosen param) {
-        String sql = "DELETE FROM " + Table.TABLE_DOSEN + " WHERE id = ? ";
+        String sql = "DELETE FROM " + Table.TABLE_DOSEN + " WHERE dosen_id = ? ";
 
-        return jdbcTemplate.update(sql, param.getId());
+        return jdbcTemplate.update(sql, param.getDosen_id());
     }
 
     @Override
@@ -75,11 +75,11 @@ public class DosenDAOImpl implements DosenDAO {
     }
 
     @Override
-    public Dosen findById(int id) {
-        String sql = "SELECT * FROM " + Table.TABLE_DOSEN + " WHERE id = ? ";
+    public Dosen findById(int dosen_id) {
+        String sql = "SELECT * FROM " + Table.TABLE_DOSEN + " WHERE dosen_id = ? ";
 
         try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Dosen.class), id);
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Dosen.class), dosen_id);
         } catch (EmptyResultDataAccessException ignored) {
         }
 

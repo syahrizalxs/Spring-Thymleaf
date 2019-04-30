@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by sukenda on 29/07/18.
- * Project belajar-spring
- */
 
 @RestController
 public class StudentController {
@@ -31,7 +27,7 @@ public class StudentController {
     @PostMapping(value = "/students")
     public String save(@RequestBody Student student) {
         Student data = service.save(student);
-        if (data.getId() == 0) {
+        if (data.getStudent_id() == 0) {
             return "Gagal insert data";
         } else {
             return "Insert data berhasil";
@@ -41,7 +37,7 @@ public class StudentController {
     @PutMapping(value = "/students")
     public String update(@RequestBody Student student) {
         Student data = service.update(student);
-        if (data.getId() == 0) {
+        if (data.getStudent_id() == 0) {
             return "Gagal update data";
         } else {
             return "Update data berhasil";

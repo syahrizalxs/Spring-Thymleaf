@@ -14,29 +14,32 @@ import java.util.List;
 @Setter
 public class Student implements Serializable {
 
-    private int id;
+    private int student_id;
 
     private String name;
 
     private String address;
+    
+    private String jurusan_id;
 
-    private List<KRS> krs;
 
     public Student() {
     }
 
-    public Student(int id) {
-        this.id = id;
+    public Student(int student_id) {
+        this.student_id = student_id;
     }
 
-    public Student(String name, String address) {
+    public Student(String name, String address, String jurusan_id) {
         this.name = name;
         this.address = address;
+        this.jurusan_id = jurusan_id;
     }
 
-    public Student(int id, String name, String address) {
-        this.id = id;
+    public Student(int student_id, String name, String address, String jurusan_id) {
+        this.student_id = student_id;
         this.name = name;
         this.address = address;
+        this.jurusan_id = jurusan_id;
     }
 }

@@ -10,14 +10,16 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+
 /**
  *
- * @author Desi Widyawati
+ * @author Desi Wdosen_idyawati
  */
+
 @Getter
 @Setter
 public class Dosen implements Serializable {
-    private int id;
+    private int dosen_id;
 
     private String name;
 
@@ -26,8 +28,8 @@ public class Dosen implements Serializable {
     public Dosen() {
     }
 
-    public Dosen(int id) {
-        this.id = id;
+    public Dosen(int dosen_id) {
+        this.dosen_id = dosen_id;
     }
 
     public Dosen(String name, String address) {
@@ -35,8 +37,8 @@ public class Dosen implements Serializable {
         this.address = address;
     }
 
-    public Dosen(int id, String name, String address) {
-        this.id = id;
+    public Dosen(int dosen_id, String name, String address) {
+        this.dosen_id = dosen_id;
         this.name = name;
         this.address = address;
     }

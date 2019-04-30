@@ -20,8 +20,6 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDAO studentDAO;
 
-    @Autowired
-    private KRSDAO krsdao;
 
     @Override
     public Student save(Student param) {
@@ -42,9 +40,8 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> find() {
         List<Student> students = studentDAO.find();
         for (Student data : students){
-            data.setKrs(krsdao.findByStudentId(data.getId()));
+            data.setStudent_id(data.getStudent_id());
         }
-
         return students;
     }
 

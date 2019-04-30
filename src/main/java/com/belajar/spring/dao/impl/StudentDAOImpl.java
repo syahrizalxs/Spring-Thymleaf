@@ -39,7 +39,7 @@ public class StudentDAOImpl implements StudentDAO {
             return ps;
         }, keyHolder);
 
-        param.setId(Objects.requireNonNull(keyHolder.getKey()).intValue());
+        param.setStudent_id(Objects.requireNonNull(keyHolder.getKey()).intValue());
         return param;
     }
 
@@ -48,21 +48,21 @@ public class StudentDAOImpl implements StudentDAO {
         String sql = "UPDATE " + Table.TABLE_STUDENT + " SET " +
                 "name = ?, " +
                 "address = ? " +
-                "WHERE id =  ? ";
+                "WHERE student_id =  ? ";
 
         jdbcTemplate.update(sql,
                 param.getName(),
                 param.getAddress(),
-                param.getId());
+                param.getStudent_id());
 
         return param;
     }
 
     @Override
     public int delete(Student param) {
-        String sql = "DELETE FROM " + Table.TABLE_STUDENT + " WHERE id = ? ";
+        String sql = "DELETE FROM " + Table.TABLE_STUDENT + " WHERE student_id = ? ";
 
-        return jdbcTemplate.update(sql, param.getId());
+        return jdbcTemplate.update(sql, param.getStudent_id());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public Student findById(int id) {
-        String sql = "SELECT * FROM " + Table.TABLE_STUDENT + " WHERE id = ? ";
+        String sql = "SELECT * FROM " + Table.TABLE_STUDENT + " WHERE student_id = ? ";
 
         try {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Student.class), id);

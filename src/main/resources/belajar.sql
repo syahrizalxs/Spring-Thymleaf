@@ -31,7 +31,7 @@ create table table_user
 -- Table structure for table_students
 -- ----------------------------
 DROP TABLE IF EXISTS table_students;
-CREATE TABLE `students` (
+CREATE TABLE `table_students` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL,

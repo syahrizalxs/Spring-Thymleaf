@@ -5,8 +5,8 @@
  */
 package com.belajar.spring.controller;
 
-import com.belajar.spring.entity.Dosen;
-import com.belajar.spring.service.DosenService;
+import com.belajar.spring.entity.Jurusan;
+import com.belajar.spring.service.JurusanService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,44 +22,45 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Desi Widyawati
  */
 @RestController
-public class DosenController {
-     @Autowired
-    private DosenService service;
+public class JurusanController {
+    @Autowired
+    private JurusanService service;
 
-    @GetMapping(value = "/dosen")
-    public List<Dosen> dosen() {
+    @GetMapping(value = "/jurusan")
+    public List<Jurusan> jurusan() {
         return service.find();
-        
     }
 
-    @GetMapping(value = "/dosen/{id}")
-    public Dosen findById(@PathVariable("id") Integer id) {
+    @GetMapping(value = "/jurusan/{id}")
+    public Jurusan findById(@PathVariable("id") Integer id) {
         return service.findById(id);
     }
 
-    @PostMapping(value = "/dosen")
-    public String save(@RequestBody Dosen dosen) {
-        Dosen data = service.save(dosen);
-        if (data.getDosen_id() == 0) {
+    @PostMapping(value = "/jurusan")
+    public String save(@RequestBody Jurusan student) {
+        Jurusan data = service.save(student);
+            
+        if ( data.getJurusan_id() == null) {
             return "Gagal insert data";
         } else {
             return "Insert data berhasil";
         }
     }
 
-    @PutMapping(value = "/dosen")
-    public String update(@RequestBody Dosen dosen) {
-        Dosen data = service.update(dosen);
-        if (data.getDosen_id() == 0) {
+    @PutMapping(value = "/jurusan")
+    public String update(@RequestBody Jurusan student) {
+        Jurusan data = service.update(student);
+        
+        if (data.getJurusan_id() == null) {
             return "Gagal update data";
         } else {
             return "Update data berhasil";
         }
     }
 
-    @DeleteMapping(value = "/dosen/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        int data = service.delete(new Dosen(id));
+    @DeleteMapping(value = "/jurusan/{id}")
+    public String delete(@PathVariable("id") String jurusan_id) {
+        int data = service.delete(new Jurusan(jurusan_id));
         if (data == 0) {
             return "Gagal delete data";
         } else {
