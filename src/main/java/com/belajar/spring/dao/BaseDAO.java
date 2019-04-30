@@ -17,5 +17,6 @@ public interface BaseDAO<T> {
     List<T> find();
 
     T findById(int id);
+    
 
 }

@@ -74,7 +74,10 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public Student findById(int id) {
-        String sql = "SELECT * FROM " + Table.TABLE_STUDENT + " WHERE student_id = ? ";
+        String sql = "SELECT student_id, name, address, namaJurusan,fakultas " +
+                " FROM " + Table.TABLE_STUDENT +" INNER JOIN " +Table.TABLE_JURUSAN +
+                " ON " + Table.TABLE_STUDENT + ".jurusan_id = " + Table.TABLE_JURUSAN + ".jurusan_id"
+                +" WHERE " + Table.TABLE_STUDENT + ".student_id = ?";
 
         try {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Student.class), id);
@@ -83,5 +86,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         return null;
     }
+    
+ 
 
 }
