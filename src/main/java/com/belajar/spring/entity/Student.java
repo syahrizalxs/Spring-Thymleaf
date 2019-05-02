@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sukenda on 29/07/18.
@@ -23,6 +24,7 @@ public class Student implements Serializable {
     private String namaJurusan;
     
     private String fakultas;
+    
 
 
     public Student() {

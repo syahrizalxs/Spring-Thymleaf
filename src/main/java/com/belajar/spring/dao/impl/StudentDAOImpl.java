@@ -2,6 +2,7 @@ package com.belajar.spring.dao.impl;
 
 import com.belajar.spring.common.Table;
 import com.belajar.spring.dao.StudentDAO;
+import com.belajar.spring.entity.KRS;
 import com.belajar.spring.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
