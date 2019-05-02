@@ -7,14 +7,34 @@ import lombok.Setter;
 @Setter
 public class KRS {
 
-    private int id;
+    private String NoKRS;
+    private int student_id;
+    private String name;
     private String namaMataKuliah;
+    private String jumlahSKS;
+
+    public KRS(String NoKRS, int student_id, String name, String namaMataKuliah, String jumlahSKS) {
+        this.NoKRS = NoKRS;
+        this.student_id = student_id;
+        this.name = name;
+        this.namaMataKuliah = namaMataKuliah;
+        this.jumlahSKS = jumlahSKS;
+    }
+
+    public KRS(int student_id, String name, String namaMataKuliah, String jumlahSKS) {
+        this.student_id = student_id;
+        this.name = name;
+        this.namaMataKuliah = namaMataKuliah;
+        this.jumlahSKS = jumlahSKS;
+    }
+
 
     public KRS() {
     }
 
-    public KRS(int id) {
-        this.id = id;
+    public KRS(String NoKRS) {
+        this.NoKRS = NoKRS;
     }
 
+   
 }

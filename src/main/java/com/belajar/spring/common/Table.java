@@ -8,4 +8,5 @@ public class Table {
     public static final String TABLE_MAHASISWA = "table_mahasiswa";
     public static final String TABLE_DOSEN = "table_dosen";
     public static final String TABLE_JURUSAN = "table_jurusan";
+    public static final String TABLE_MATKUL = "table_matkul";
 }
