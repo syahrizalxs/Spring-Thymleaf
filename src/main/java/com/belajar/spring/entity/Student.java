@@ -24,8 +24,20 @@ public class Student implements Serializable {
     private String namaJurusan;
     
     private String fakultas;
-    
 
+    private String jurusan_id;
+
+    @Override
+    public String   toString() {
+        return "Student{" +
+                "student_id=" + student_id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", namaJurusan='" + namaJurusan + '\'' +
+                ", fakultas='" + fakultas + '\'' +
+                ", jurusan_id='" + jurusan_id + '\'' +
+                '}';
+    }
 
     public Student() {
     }
@@ -47,5 +59,13 @@ public class Student implements Serializable {
         this.address = address;
         this.namaJurusan = namaJurusan;
         this.fakultas = fakultas;
+
+    }
+
+    public Student(int student_id, String name, String address, String jurusan_id) {
+        this.student_id = student_id;
+        this.name = name;
+        this.address = address;
+        this.jurusan_id = jurusan_id;
     }
 }

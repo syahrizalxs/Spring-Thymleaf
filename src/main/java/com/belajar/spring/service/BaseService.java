@@ -1,5 +1,7 @@
 package com.belajar.spring.service;
 
+import com.belajar.spring.entity.Student;
+
 import java.util.List;
 
 /**
@@ -17,5 +19,6 @@ public interface BaseService<T> {
     List<T> find();
 
     T findById(int id);
+
 
 }

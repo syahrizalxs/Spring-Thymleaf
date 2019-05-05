@@ -1,8 +1,6 @@
 package com.belajar.spring.service.impl;
 
-import com.belajar.spring.dao.KRSDAO;
 import com.belajar.spring.dao.StudentDAO;
-import com.belajar.spring.entity.KRS;
 import com.belajar.spring.entity.Student;
 import com.belajar.spring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +49,9 @@ public class StudentServiceImpl implements StudentService {
     public Student findById(int id) {
          return studentDAO.findById(id);
     }
-    
-    
-    
-   
+
+    @Override
+    public List<Student> findByName(Student param) {
+        return studentDAO.findByName(param);
+    }
 }

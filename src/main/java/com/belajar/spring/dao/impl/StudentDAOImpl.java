@@ -4,6 +4,7 @@ import com.belajar.spring.common.Table;
 import com.belajar.spring.dao.StudentDAO;
 import com.belajar.spring.entity.KRS;
 import com.belajar.spring.entity.Student;
+import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -30,13 +31,14 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public Student save(Student param) {
-        String sql = "INSERT INTO " + Table.TABLE_STUDENT + " (name, address) VALUES (?, ?)";
+        String sql = "INSERT INTO " + Table.TABLE_STUDENT + " (name , address, jurusan_id) VALUES (?,?,?)";
 
         final KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, param.getName());
             ps.setString(2, param.getAddress());
+            ps.setString(3, param.getJurusan_id());
             return ps;
         }, keyHolder);
 
@@ -44,26 +46,44 @@ public class StudentDAOImpl implements StudentDAO {
         return param;
     }
 
+//    @Override
+//    public Student update(Student param) {
+//        String sql = "UPDATE " + Table.TABLE_STUDENT + " SET " +
+//                "name = ?, " +
+//                "address = ? " +
+//                "WHERE student_id =  ? ";
+//
+//        jdbcTemplate.update(sql,
+//                param.getName(),
+//                param.getAddress(),
+//                param.getStudent_id());
+//
+//        return param;
+//    }
+
     @Override
     public Student update(Student param) {
-        String sql = "UPDATE " + Table.TABLE_STUDENT + " SET " +
-                "name = ?, " +
-                "address = ? " +
-                "WHERE student_id =  ? ";
-
-        jdbcTemplate.update(sql,
-                param.getName(),
-                param.getAddress(),
-                param.getStudent_id());
-
+        String sql = "update " + Table.TABLE_STUDENT + " set name=?,address=? where student_id=?";
+        int rtn = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, param.getName());
+            ps.setString(2, param.getAddress());
+            ps.setInt(3, param.getStudent_id());
+            return ps;
+        });
+        param.setStudent_id(rtn);
         return param;
     }
 
     @Override
     public int delete(Student param) {
-        String sql = "DELETE FROM " + Table.TABLE_STUDENT + " WHERE student_id = ? ";
-
-        return jdbcTemplate.update(sql, param.getStudent_id());
+        String sql = "DELETE from " + Table.TABLE_STUDENT + " where student_id = ?";
+        int rtn = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, param.getStudent_id());
+            return ps;
+        });
+        return rtn;
     }
 
     @Override
@@ -75,10 +95,7 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public Student findById(int id) {
-        String sql = "SELECT student_id, name, address, namaJurusan,fakultas " +
-                " FROM " + Table.TABLE_STUDENT +" INNER JOIN " +Table.TABLE_JURUSAN +
-                " ON " + Table.TABLE_STUDENT + ".jurusan_id = " + Table.TABLE_JURUSAN + ".jurusan_id"
-                +" WHERE " + Table.TABLE_STUDENT + ".student_id = ?";
+        String sql = "SELECT * FROM "+ Table.TABLE_STUDENT + " where student_id = ?";
 
         try {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Student.class), id);
@@ -87,7 +104,10 @@ public class StudentDAOImpl implements StudentDAO {
 
         return null;
     }
-    
- 
 
+    @Override
+    public List<Student> findByName(Student param){
+        String sql = "select * from " + Table.TABLE_STUDENT + " where name like ?";
+        return jdbcTemplate.query(sql, new Object[]{"%" + param.getName() + "%"}, new BeanPropertyRowMapper<>(Student.class));
+    }
 }

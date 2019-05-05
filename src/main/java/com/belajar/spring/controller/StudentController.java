@@ -5,58 +5,72 @@ import com.belajar.spring.entity.Student;
 import com.belajar.spring.service.KRSService;
 import com.belajar.spring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@RestController
+@Controller
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
     private StudentService service;
 
-    @Autowired
-    private KRSService kservice;
-    
-    @GetMapping(value = "/students")
-    public List<Student> students() {
-        return service.find();
+    @GetMapping(path = "/create")
+    public String viewCreate(Model model) {
+        model.addAttribute("dataSets", new Student());
+        return "/student/create";
     }
 
-    @GetMapping(value = "/students/{id}")
-    public Student findById(@PathVariable("id") Integer id) {
-        return service.findById(id);
+    @GetMapping(path = "/update/{id}")
+    public String viewUpdate(Model model, @PathVariable(value = "id") int id) {
+        model.addAttribute("dataSets", service.findById(id));
+        return "/student/update";
     }
-    
 
-    @PostMapping(value = "/students")
-    public String save(@RequestBody Student student) {
-        Student data = service.save(student);
+    @PostMapping(value = "/create")
+    public String save(Student param) {
+        Student data = service.save(param);
         if (data.getStudent_id() == 0) {
-            return "Gagal insert data";
+            return "redirect:/student?failed";
         } else {
-            return "Insert data berhasil";
+            return "redirect:/student?success";
         }
     }
 
-    @PutMapping(value = "/students")
-    public String update(@RequestBody Student student) {
-        Student data = service.update(student);
+    @PutMapping(path = "/update")
+    public String update(Student param) {
+        Student data = service.update(param);
         if (data.getStudent_id() == 0) {
-            return "Gagal update data";
+            return "redirect:/student?ufailed";
         } else {
-            return "Update data berhasil";
+            return "redirect:/student?usuccess";
         }
     }
 
-    @DeleteMapping(value = "/students/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        int data = service.delete(new Student(id));
+    @DeleteMapping(path = "/delete")
+    public String delete(Student param) {
+        int data = service.delete(param);
         if (data == 0) {
-            return "Gagal delete data";
+            return "redirect:/student?dfailed";
         } else {
-            return "Delete data berhasil";
+            return "redirect:/student?dsuccess";
         }
+    }
+
+    @GetMapping(path = "")
+        public String viewData(Model model, @RequestParam(value = "search", required = false) String param,
+                @RequestParam(value = "filter", required = false) String param1) {
+            if (param == null && param1 == null) {
+                model.addAttribute("dataSets", service.find());
+            } else {
+                Student user = new Student();
+                user.setName(param);
+                model.addAttribute("dataSets", service.findByName(user));
+            }
+        return "/student/list";
     }
 }
