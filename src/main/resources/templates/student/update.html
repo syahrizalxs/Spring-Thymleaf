@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!--  Custom CSS -->
-    <link href="./static/css/main.css" rel="stylesheet" th:href="@{../css/main.css}">
+    <link href="/css/main.css" rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -73,9 +73,10 @@
             <div class="row">
                 <div class="col col-sm-6 ml-5">
                     <form  th:object="${dataSets}" th:action="@{/student/update}" th:method="put">
+                        <input type="text" th:id="student_id" th:name="student_id" th:field="*{student_id}" hidden>
                         <div class="form-group">
                             <label>Name </label>
-                            <input type="text" class="form-control" th:id="name" th:name="name"  th:field="*{dataname}" placeholder="Enter name.." required />
+                            <input type="text" class="form-control" th:id="name" th:name="name"  th:field="*{name}" placeholder="Enter name.." required />
                         </div>
                         <div class="form-group">
                             <label>Address</label>
