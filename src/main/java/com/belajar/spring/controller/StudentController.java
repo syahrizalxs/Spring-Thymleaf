@@ -1,15 +1,11 @@
 package com.belajar.spring.controller;
 
-import com.belajar.spring.entity.KRS;
 import com.belajar.spring.entity.Student;
-import com.belajar.spring.service.KRSService;
 import com.belajar.spring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Controller

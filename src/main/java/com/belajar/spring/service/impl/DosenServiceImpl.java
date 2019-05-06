@@ -51,4 +51,9 @@ public class DosenServiceImpl implements DosenService {
     public Dosen findById(int id) {
         return dosenDAO.findById(id);
     }
+
+    @Override
+    public List<Dosen> findByName(Dosen param){
+        return dosenDAO.findByName(param);
+    }
 }

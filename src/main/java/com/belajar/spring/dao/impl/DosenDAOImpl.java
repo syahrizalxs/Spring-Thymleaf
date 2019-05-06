@@ -26,6 +26,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class DosenDAOImpl implements DosenDAO {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -85,4 +86,11 @@ public class DosenDAOImpl implements DosenDAO {
 
         return null;
     }
+
+    @Override
+    public List<Dosen> findByName(Dosen param){
+        String sql = "select * from " + Table.TABLE_DOSEN + " where name like ?";
+        return jdbcTemplate.query(sql, new Object[]{"%" + param.getName() + "%"}, new BeanPropertyRowMapper<>(Dosen.class));
+    }
+
 }

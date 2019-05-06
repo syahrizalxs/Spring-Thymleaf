@@ -1,69 +1,75 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.belajar.spring.controller;
 
 import com.belajar.spring.entity.Dosen;
 import com.belajar.spring.service.DosenService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
  * @author Desi Widyawati
  */
-@RestController
+@Controller
+@RequestMapping("/dosen")
 public class DosenController {
      @Autowired
     private DosenService service;
 
-    @GetMapping(value = "/dosen")
-    public List<Dosen> dosen() {
-        return service.find();
-        
+    @GetMapping(path = "/create")
+    public String viewCreate(Model model) {
+        model.addAttribute("dataSets", new Dosen());
+        return "/dosen/create";
     }
 
-    @GetMapping(value = "/dosen/{id}")
-    public Dosen findById(@PathVariable("id") Integer id) {
-        return service.findById(id);
+    @GetMapping(path = "/update/{id}")
+    public String viewUpdate(Model model, @PathVariable(value = "id") int id) {
+        model.addAttribute("dataSets", service.findById(id));
+        return "/dosen/update";
     }
 
-    @PostMapping(value = "/dosen")
-    public String save(@RequestBody Dosen dosen) {
-        Dosen data = service.save(dosen);
+    @PostMapping(value = "/create")
+    public String save(Dosen param) {
+        Dosen data = service.save(param);
         if (data.getDosen_id() == 0) {
-            return "Gagal insert data";
+            return "redirect:/dosen?failed";
         } else {
-            return "Insert data berhasil";
+            return "redirect:/dosen?success";
         }
     }
 
-    @PutMapping(value = "/dosen")
-    public String update(@RequestBody Dosen dosen) {
-        Dosen data = service.update(dosen);
+    @PutMapping(path = "/update")
+    public String update(Dosen param) {
+        Dosen data = service.update(param);
         if (data.getDosen_id() == 0) {
-            return "Gagal update data";
+            return "redirect:/dosen?ufailed";
         } else {
-            return "Update data berhasil";
+            return "redirect:/dosen?usuccess";
         }
     }
 
-    @DeleteMapping(value = "/dosen/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        int data = service.delete(new Dosen(id));
+    @DeleteMapping(path = "/delete")
+    public String delete(Dosen param) {
+        int data = service.delete(param);
         if (data == 0) {
-            return "Gagal delete data";
+            return "redirect:/dosen?dfailed";
         } else {
-            return "Delete data berhasil";
+            return "redirect:/dosen?dsuccess";
         }
     }
+
+    @GetMapping(path = "")
+    public String viewData(Model model, @RequestParam(value = "search", required = false) String param,
+                           @RequestParam(value = "filter", required = false) String param1) {
+        if (param == null && param1 == null) {
+            model.addAttribute("dataSets", service.find());
+        } else {
+            Dosen user = new Dosen();
+            user.setName(param);
+            model.addAttribute("dataSets", service.findByName(user));
+        }
+        return "/dosen/list";
+    }
+     
 }

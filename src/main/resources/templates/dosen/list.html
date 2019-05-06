@@ -30,14 +30,14 @@
 
         <ul class="list-unstyled components">
             <p>Dashboard</p>
-            <li class="active">
+            <li>
                 <a th:href="@{/student}" >Student</a>
             </li>
-            <li>
-                <a th:href="@{/dosen}">Dosen</a>
+            <li class="active">
+                <a th:href="@{/dosen}" >Dosen</a>
             </li>
             <li>
-                <a th:href="@{/student}">Jurusan</a>
+                <a th:href="@{/jurusan}" >Jurusan</a>
             </li>
         </ul>
 
@@ -64,7 +64,7 @@
                     </button>
                 </div>
                 <div class="col col-md-11">
-                    <h2>Student Data</h2>
+                    <h2>Data Dosen</h2>
                 </div>
             </div>
 
@@ -118,6 +118,9 @@
                         <button class="btn btn-primary" onclick="window.location.href='/student/create';"><span
                                 class="fa fa-plus"></span>Add Data
                         </button>
+                        <button class="btn btn-secondary" onclick="window.location.href='/student';">
+                            <i class="fas fa-retweet"></i>
+                        </button>
                     </div>
                     <div class="col col-lg-3">
                         <div class="input-group" id="adv-search">
@@ -127,13 +130,15 @@
                                        th:value="${param.search}"
                                        placeholder="Search..">
                             </form>
+                            <button type="button" class="btn btn-default"
+                                    onclick="document.getElementById('form-search').submit();"><span
+                                    class="fa fa-search" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
 
-                <thead>
+                <thead class="thead-dark">
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Address</th>
                     <th scope="col"><i class="fa fa-cogs"></i> </th>
@@ -141,13 +146,13 @@
                 </thead>
                 <tbody>
                 <tr th:each="data : ${dataSets}">
-                    <td th:text="${data.student_id}"></td>
+                    <td th:text="${data.dosen_id}" hidden></td>
                     <td th:text="${data.name}"></td>
                     <td th:text="${data.address}">></td>
                     <td align="center">
-                        <a th:href="${'student/update/' + data.student_id}" class="btn btn-primary"><i class="fa fa-user-edit"></i></a>
+                        <a th:href="${'student/update/' + data.dosen_id}" class="btn btn-primary"><i class="fa fa-user-edit"></i></a>
                         <a href="#" class="delete-modal btn btn-danger"
-                           th:data-value="${data.student_id}"
+                           th:data-value="${data.dosen_id}"
                            data-backdrop="false"
                            data-toggle="modal"
                            data-target="#myModal"><i class="fa fa-trash"></i></a>
@@ -170,7 +175,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <form th:action="@{/student/delete}" th:method="delete">
-                                <input type="hidden" th:id="student_id" th:name="student_id">
+                                <input type="hidden" th:id="dosen_id" th:name="dosen_id">
                                 <button type="submit" class="btn btn-danger" name="task_del">Delete</button>
                             </form>
                         </div>
@@ -179,6 +184,12 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<-- Modal Add -->
+
+
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -200,7 +211,7 @@
         $(document).ready(function (e) {
             $(document).on("click", ".delete-modal", function (e) {
                 var id = $(this).attr('data-value');
-                $('input[name="student_id"]').val(id);
+                $('input[name="dosen_id"]').val(id);
             });
         });
 

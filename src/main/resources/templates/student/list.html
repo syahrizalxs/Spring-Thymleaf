@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>Belajar Spring</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -34,10 +34,10 @@
                 <a th:href="@{/student}" >Student</a>
             </li>
             <li>
-                <a href="#">Dosen</a>
+                <a th:href="@{/dosen}">Dosen</a>
             </li>
             <li>
-                <a href="#">Jurusan</a>
+                <a th:href="@{/student}">Jurusan</a>
             </li>
         </ul>
 
@@ -118,6 +118,9 @@
                     <button class="btn btn-primary" onclick="window.location.href='/student/create';"><span
                             class="fa fa-plus"></span>Add Data
                     </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='/student';">
+                        <i class="fas fa-retweet"></i>
+                    </button>
                 </div>
                 <div class="col col-lg-3">
                     <div class="input-group" id="adv-search">
@@ -127,13 +130,15 @@
                                    th:value="${param.search}"
                                    placeholder="Search..">
                         </form>
+                        <button type="button" class="btn btn-default"
+                                onclick="document.getElementById('form-search').submit();"><span
+                                class="fa fa-search" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
 
             <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
                 <th scope="col"><i class="fa fa-cogs"></i> </th>
@@ -141,7 +146,7 @@
             </thead>
             <tbody>
             <tr th:each="data : ${dataSets}">
-                <td th:text="${data.student_id}"></td>
+                <td th:text="${data.student_id}" hidden></td>
                 <td th:text="${data.name}"></td>
                 <td th:text="${data.address}">></td>
                 <td align="center">
