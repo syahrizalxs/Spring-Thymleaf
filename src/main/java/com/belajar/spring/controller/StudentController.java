@@ -63,9 +63,9 @@ public class StudentController {
             if (param == null && param1 == null) {
                 model.addAttribute("dataSets", service.find());
             } else {
-                Student user = new Student();
-                user.setName(param);
-                model.addAttribute("dataSets", service.findByName(user));
+                Student student = new Student();
+                student.setName(param);
+                model.addAttribute("dataSets", service.findByName(student));
             }
         return "/student/list";
     }
