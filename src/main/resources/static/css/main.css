@@ -1,4 +1,6 @@
-
+/*
+    DEMO STYLE
+*/
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
@@ -219,7 +221,4 @@ a.article, a.article:hover {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 
-    #myModal {
-        z-index: 1;
-    }
 }

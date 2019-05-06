@@ -30,11 +30,11 @@
 
         <ul class="list-unstyled components">
             <p>Dashboard</p>
-            <li class="active">
+            <li>
                 <a th:href="@{/student}" >Student</a>
             </li>
-            <li>
-                <a href="#">Dosen</a>
+            <li class="active">
+                <a href="@{/dosen}">Dosen</a>
             </li>
             <li>
                 <a href="#">Jurusan</a>
@@ -64,7 +64,7 @@
                     </button>
                 </div>
                 <div class="col col-md-11">
-                    <h2>Edit Student Entry</h2>
+                    <h2>Edit Dosen Entry</h2>
                 </div>
             </div>
 
@@ -72,8 +72,8 @@
 
             <div class="row">
                 <div class="col col-sm-6 ml-5">
-                    <form  th:object="${dataSets}" th:action="@{/student/update}" th:method="put">
-                        <input type="text" th:id="student_id" th:name="student_id" th:field="*{student_id}" hidden>
+                    <form  th:object="${dataSets}" th:action="@{/dosen/update}" th:method="put">
+                        <input type="text" th:id="dosen_id" th:name="dosen_" th:field="*{dosen_id}" hidden>
                         <div class="form-group">
                             <label>Name </label>
                             <input type="text" class="form-control" th:id="name" th:name="name"  th:field="*{name}" placeholder="Enter name.." required />
@@ -81,10 +81,6 @@
                         <div class="form-group">
                             <label>Address</label>
                             <input type="text" class="form-control" th:id="address" th:name="address"  th:field="*{address}" placeholder="Enter Address" required />
-                        </div>
-                        <div class="form-group">
-                            <label >Jurusan ID </label>
-                            <input type="text" class="form-control" th:id="jurusan_id" th:name="jurusan_id" th:field="*{jurusan_id}" placeholder="Enter Jurusan ID.."required />
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

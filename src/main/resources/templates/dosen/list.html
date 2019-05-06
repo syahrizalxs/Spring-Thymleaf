@@ -115,16 +115,16 @@
 
                 <div class="row mb-3">
                     <div class="col col-md-9">
-                        <button class="btn btn-primary" onclick="window.location.href='/student/create';"><span
+                        <button class="btn btn-primary" onclick="window.location.href='/dosen/create';"><span
                                 class="fa fa-plus"></span>Add Data
                         </button>
-                        <button class="btn btn-secondary" onclick="window.location.href='/student';">
+                        <button class="btn btn-secondary" onclick="window.location.href='/dosen';">
                             <i class="fas fa-retweet"></i>
                         </button>
                     </div>
                     <div class="col col-lg-3">
                         <div class="input-group" id="adv-search">
-                            <form th:id="form-search" th:action="@{/student}"
+                            <form th:id="form-search" th:action="@{/dosen}"
                                   th:method="get">
                                 <input class="form-control" type="text" id="search" name="search"
                                        th:value="${param.search}"
@@ -137,7 +137,7 @@
                     </div>
                 </div>
 
-                <thead class="thead-dark">
+                <thead>
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Address</th>
@@ -150,7 +150,7 @@
                     <td th:text="${data.name}"></td>
                     <td th:text="${data.address}">></td>
                     <td align="center">
-                        <a th:href="${'student/update/' + data.dosen_id}" class="btn btn-primary"><i class="fa fa-user-edit"></i></a>
+                        <a th:href="${'dosen/update/' + data.dosen_id}" class="btn btn-primary"><i class="fa fa-user-edit"></i></a>
                         <a href="#" class="delete-modal btn btn-danger"
                            th:data-value="${data.dosen_id}"
                            data-backdrop="false"
@@ -174,7 +174,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <form th:action="@{/student/delete}" th:method="delete">
+                            <form th:action="@{/dosen/delete}" th:method="delete">
                                 <input type="hidden" th:id="dosen_id" th:name="dosen_id">
                                 <button type="submit" class="btn btn-danger" name="task_del">Delete</button>
                             </form>
