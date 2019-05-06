@@ -7,10 +7,14 @@ package com.belajar.spring.service;
 
 import com.belajar.spring.entity.Jurusan;
 
+import java.util.List;
+
 /**
  *
  * @author Desi Widyawati
  */
 public interface JurusanService extends BaseService<Jurusan> {
-    
+    List<Jurusan> findByName(Jurusan param);
+
+
 }

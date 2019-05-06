@@ -17,7 +17,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Jurusan implements Serializable {
-    
+
+    public Jurusan(int id) {
+        this.id = id;
+    }
+
+    private int id;
     private String jurusan_id;
     private String namaJurusan;
     private String fakultas;

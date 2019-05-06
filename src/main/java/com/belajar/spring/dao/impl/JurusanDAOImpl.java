@@ -7,6 +7,7 @@ package com.belajar.spring.dao.impl;
 
 import com.belajar.spring.common.Table;
 import com.belajar.spring.dao.JurusanDAO;
+import com.belajar.spring.entity.Dosen;
 import com.belajar.spring.entity.Jurusan;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -63,9 +64,9 @@ public class JurusanDAOImpl implements JurusanDAO {
 
     @Override
     public int delete(Jurusan param) {
-        String sql = "DELETE FROM " + Table.TABLE_JURUSAN + " WHERE jurusan_id = ? ";
+        String sql = "DELETE FROM " + Table.TABLE_JURUSAN + " WHERE id = ? ";
 
-        return jdbcTemplate.update(sql, param.getJurusan_id());
+        return jdbcTemplate.update(sql, param.getId());
     }
 
     @Override
@@ -76,14 +77,23 @@ public class JurusanDAOImpl implements JurusanDAO {
     }
 
     @Override
-    public Jurusan findById(int jurusan_id) {
-        String sql = "SELECT * FROM " + Table.TABLE_JURUSAN + " WHERE jurusan_id = ? ";
-
+    public Jurusan findById(int id) {
+        String sql = "SELECT * FROM " + Table.TABLE_JURUSAN + " WHERE id = ? ";
         try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Jurusan.class), jurusan_id);
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Jurusan.class), id);
         } catch (EmptyResultDataAccessException ignored) {
         }
 
         return null;
     }
+
+
+
+    @Override
+    public List<Jurusan> findByName(Jurusan param){
+        String sql = "select * from " + Table.TABLE_JURUSAN + " where name like ?";
+        return jdbcTemplate.query(sql, new Object[]{"%" + param.getNamaJurusan() + "%"}, new BeanPropertyRowMapper<>(Jurusan.class));
+    }
+
+
 }

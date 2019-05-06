@@ -7,20 +7,20 @@ package com.belajar.spring.service.impl;
 
 import com.belajar.spring.dao.JurusanDAO;
 import com.belajar.spring.entity.Jurusan;
-import com.belajar.spring.service.JurusanService;
+
 import java.util.List;
+
+import com.belajar.spring.service.JurusanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Desi Widyawati
  */
-
 @Service
 public class JurusanServiceImpl implements JurusanService {
-    
+
     @Autowired
     private JurusanDAO jurusanDAO;
 
@@ -46,6 +46,7 @@ public class JurusanServiceImpl implements JurusanService {
         for (Jurusan data : jurusan){
             data.setJurusan_id(data.getJurusan_id());
         }
+
         return jurusan;
     }
 
@@ -53,4 +54,13 @@ public class JurusanServiceImpl implements JurusanService {
     public Jurusan findById(int id) {
         return jurusanDAO.findById(id);
     }
+
+
+
+
+    @Override
+    public List<Jurusan> findByName(Jurusan param){
+        return jurusanDAO.findByName(param);
+    }
+
 }

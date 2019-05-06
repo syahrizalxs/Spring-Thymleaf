@@ -93,4 +93,6 @@ public class DosenDAOImpl implements DosenDAO {
         return jdbcTemplate.query(sql, new Object[]{"%" + param.getName() + "%"}, new BeanPropertyRowMapper<>(Dosen.class));
     }
 
+
+
 }
